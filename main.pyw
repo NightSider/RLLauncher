@@ -80,7 +80,7 @@ def button_start_game():
     if helper.open_game():
         messagebox.showinfo("Can't find game",
                             "RocketLeague.exe couldn't be located on the standard path. "
-                            "Choose RocketLeague.exe once from Explorer. Afterwards you can start the game from here.")
+                            "Choose Programs/Steam/steamapps/common/rocketleague/Binaries/RocketLeague.exe once from Explorer. Afterwards you can start the game from here.")
         try:
             file_path = filedialog.askopenfilename()
             helper.set_path_setting('SaveFiles', 'PathToGame', file_path)
@@ -103,11 +103,13 @@ def check_for_backup():
 path = helper.get_path()
 new_file = path[:-4] + "_default.ini"
 
+
 # Check for TASystemsettings_default.ini
 if not Path(path).is_file():
     messagebox.showerror("Can't find TASystemsettings.ini",
-                         "Open the Game to restore the file. Close it again to modify it with this program.")
-    sys.exit(0)
+                         "Choose TASystemsttings in Explorer - should be under documents\My Games\Rocket League\TAGame\Config\TASystemSettings.ini")
+    file_path = filedialog.askopenfilename()
+    helper.set_path_setting('SaveFiles', 'tasystempath', file_path)
 
 # Make backup copy of TASystemSettings.ini as TASystemSettings_default.ini
 check_for_backup()
